@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottery Spin</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f8f8f8;
+        }
+        .wheel {
+            width: 200px;
+            height: 200px;
+            border: 16px solid #4CAF50;
+            border-radius: 50%;
+            background: conic-gradient(#FF5733 0%, #FFC300 25%, #DAF7A6 50%, #FF5733 75%, #FFC300 100%);
+            margin-bottom: 20px;
+            transition: transform 4s ease-out;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spin the Lottery Wheel!</h1>
+    <div id="wheel" class="wheel"></div>
+    <button id="spinButton">Spin!</button>
+    <p id="result"></p>
+    <script>
+        document.getElementById("spinButton").addEventListener("click", function() {
+            const wheel = document.getElementById("wheel");
+            const randomDegree = Math.floor(Math.random() * 360 + 720); // Spin 2+ turns
+            wheel.style.transform = `rotate(${randomDegree}deg)`;
+
+            // Determine the result after spinning
+            setTimeout(() => {
+                const result = (randomDegree % 360) / (360 / 6); // Assuming 6 segments
+                document.getElementById("result").innerText = `You landed on segment ${Math.ceil(result)}`;
+            }, 4000); // Match this duration with the CSS transition duration
+        });
+    </script>
+</body>
+</html>
